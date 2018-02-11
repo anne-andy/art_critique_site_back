@@ -1,4 +1,4 @@
-package anneAndy.projects.ArtCritSiteBack;
+package anneAndy.projects.ArtCritSiteBack.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import anneAndy.projects.ArtCritSiteBack.UserRepository;
+import anneAndy.projects.ArtCritSiteBack.User.UserRepository;
 
 @Controller  
 @RequestMapping(path="/user")

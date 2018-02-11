@@ -1,4 +1,4 @@
-package anneAndy.projects.ArtCritSiteBack;
+package anneAndy.projects.ArtCritSiteBack.User;
 
 import org.springframework.data.repository.CrudRepository;
 
