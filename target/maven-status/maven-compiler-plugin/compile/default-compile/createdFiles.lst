@@ -1,4 +1,6 @@
+anneAndy\projects\ArtCritSiteBack\Image\Image.class
 anneAndy\projects\ArtCritSiteBack\App.class
-anneAndy\projects\ArtCritSiteBack\UserRepository.class
-anneAndy\projects\ArtCritSiteBack\UserController.class
-anneAndy\projects\ArtCritSiteBack\User.class
+anneAndy\projects\ArtCritSiteBack\User\UserController.class
+anneAndy\projects\ArtCritSiteBack\User\User.class
+anneAndy\projects\ArtCritSiteBack\User\UserRepository.class
+Content\Content.class
