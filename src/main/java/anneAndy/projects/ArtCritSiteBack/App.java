@@ -23,6 +23,6 @@ public class App
     public static void main( String[] args )
     {
     	SpringApplication.run(App.class, args);
-    	new S3ServiceImpl().uploadFile("a.jpg", "C:\\Users\\shiny\\Pictures\\Cyberpunk\\a.jpg");
+    	//new S3ServiceImpl().uploadFile("a.jpg", "C:\\Users\\shiny\\Pictures\\Cyberpunk\\a.jpg");
     }
 }
