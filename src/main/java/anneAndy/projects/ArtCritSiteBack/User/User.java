@@ -1,10 +1,16 @@
 package anneAndy.projects.ArtCritSiteBack.User;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import anneAndy.projects.ArtCritSiteBack.Image.Image;
 
 @Entity
 @Table(name = "User")
@@ -16,6 +22,7 @@ public class User {
 	private String userName;
 	private String password;
 	private String dateJoined;
+	private Set<Image> images;
 	
 	public Integer getId() {
 		return idUser;
@@ -43,6 +50,15 @@ public class User {
 	
 	public void setDateJoined(String dateJoined) {
 		this.dateJoined = dateJoined;
+	}
+
+	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+	public Set<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(Set<Image> images) {
+		this.images = images;
 	}
 
 }

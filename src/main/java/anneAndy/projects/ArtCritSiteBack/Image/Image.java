@@ -15,6 +15,7 @@ import anneAndy.projects.ArtCritSiteBack.User.User;
 
 public class Image {
 	
+	@Id
 	private String imageKey;
 	private String type; //needs to be an enum in the future
 	private String title;
