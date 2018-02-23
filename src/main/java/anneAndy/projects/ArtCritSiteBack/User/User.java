@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import anneAndy.projects.ArtCritSiteBack.Image.Image;
 
 @Entity
@@ -22,6 +24,7 @@ public class User {
 	private String userName;
 	private String password;
 	private String dateJoined;
+	@OneToMany(mappedBy = "user")
 	private Set<Image> images;
 	
 	public Integer getId() {
@@ -52,7 +55,6 @@ public class User {
 		this.dateJoined = dateJoined;
 	}
 
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
 	public Set<Image> getImages() {
 		return images;
 	}

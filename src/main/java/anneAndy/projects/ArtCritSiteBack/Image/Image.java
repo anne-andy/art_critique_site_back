@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import anneAndy.projects.ArtCritSiteBack.User.User;
 
 @Entity
@@ -17,9 +19,16 @@ public class Image {
 	
 	@Id
 	private String imageKey;
-	private String type; //needs to be an enum in the future
+	private String type; //TO DO: this needs to be an enum in the future
 	private String title;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="idUser")
 	private User user;
+	
+	public Image() {
+		
+	}
 	
 	public Image(String imageKey, String title, User user) {
 		this.setImageKey(imageKey);
@@ -51,8 +60,7 @@ public class Image {
 		this.title = title;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name= "imageKey")
+	
 	public User getUser() {
 		return user;
 	}
