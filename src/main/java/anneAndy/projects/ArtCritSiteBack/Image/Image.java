@@ -30,6 +30,11 @@ public class Image {
 		
 	}
 	
+	public Image(String imageKey, String title) {
+		this.setImageKey(imageKey);
+		this.setTitle(title);
+	}
+	
 	public Image(String imageKey, String title, User user) {
 		this.setImageKey(imageKey);
 		this.setTitle(title);
@@ -69,5 +74,9 @@ public class Image {
 		this.user = user;
 	}
 	
+	@Override
+	public String toString() {
+		return imageKey + " : " + title + " : " + user;
+	}
 
 }
