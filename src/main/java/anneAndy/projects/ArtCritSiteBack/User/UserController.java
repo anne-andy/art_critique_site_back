@@ -39,8 +39,9 @@ public class UserController {
 		
 		User user = userRepository.findByIdUser(id);
 		image.setUser(user);
-		System.out.println(image);
+		//TODO: generate unique keyname here?
 		return imageRepository.save(image);
+		
 	}
 	
 }
