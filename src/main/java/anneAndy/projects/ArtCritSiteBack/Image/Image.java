@@ -76,7 +76,7 @@ public class Image {
 	
 	@Override
 	public String toString() {
-		return imageKey + " : " + title + " : " + user;
+		return imageKey + " : " + title + " : " + type + " : " + user.getId() + " : " + user.getUserName();
 	}
 
 }
