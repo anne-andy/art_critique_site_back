@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientComment;
 import anneAndy.projects.ArtCritSiteBack.UploaderComment.UploaderComment;
 import anneAndy.projects.ArtCritSiteBack.User.User;
 
@@ -39,6 +40,11 @@ public class Image {
             cascade =  CascadeType.ALL,
             mappedBy = "image")
 	private UploaderComment uploaderComment;
+	
+	@OneToMany(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "image")
+	private Set<ClientComment> clientComments;
 	
 	public Image() {
 		
@@ -95,6 +101,14 @@ public class Image {
 	
 	public UploaderComment getUploaderComment() {
 		return this.uploaderComment;
+	}
+	
+	public void setClientComments(Set<ClientComment> clientComments) {
+		this.clientComments = clientComments;
+	}
+	
+	public Set<ClientComment> getClientComments() {
+		return this.clientComments;
 	}
 	
 	@Override
