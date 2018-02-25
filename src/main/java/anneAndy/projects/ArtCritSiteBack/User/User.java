@@ -21,11 +21,14 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idUser;
+	
 	private String userName;
+	
 	private String password;
+	
 	private String dateJoined;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade =  CascadeType.ALL)
 	private Set<Image> images;
 	
 	public Integer getId() {
@@ -62,6 +65,11 @@ public class User {
 
 	public void setImages(Set<Image> images) {
 		this.images = images;
+	}
+	
+	@Override
+	public String toString() {
+		return userName + " : " + images;
 	}
 
 }
