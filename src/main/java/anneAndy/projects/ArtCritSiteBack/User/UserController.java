@@ -2,6 +2,7 @@ package anneAndy.projects.ArtCritSiteBack.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import anneAndy.projects.ArtCritSiteBack.Image.Image;
 import anneAndy.projects.ArtCritSiteBack.Image.ImageRepository;
 import anneAndy.projects.ArtCritSiteBack.User.UserRepository;
 
+@CrossOrigin(origins = "http://localhost:8000", maxAge = 3600)
 @Controller  
 @RequestMapping(path="/user")
 public class UserController {
@@ -36,9 +38,10 @@ public class UserController {
 	
 	@RequestMapping(value= "/{id}/image", method = RequestMethod.POST)
 	public @ResponseBody Image uploadUserImage(@PathVariable("id") int id, @RequestBody Image image) {
-		
+		System.out.println(image);
 		User user = userRepository.findByIdUser(id);
 		image.setUser(user);
+		System.out.println(image.getUploaderComment().getImage());
 		//TODO: generate unique keyname here?
 		return imageRepository.save(image);
 		

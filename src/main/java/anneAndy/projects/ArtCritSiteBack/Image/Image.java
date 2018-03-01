@@ -1,5 +1,6 @@
 package anneAndy.projects.ArtCritSiteBack.Image;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,9 @@ import anneAndy.projects.ArtCritSiteBack.User.User;
 
 @Entity
 @Table(name = "Image")
-public class Image {
+public class Image implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private String imageKey;
@@ -113,7 +116,11 @@ public class Image {
 	
 	@Override
 	public String toString() {
-		return imageKey + " : " + title + " : " + type + " : " + user.getId() + " : " + user.getUserName() + " : " +
+		return imageKey + " : " + 
+	title + " : " + 
+				type + " : " + 
+//	user.getId() + " : " + 
+//				user.getUserName() + " : " +
 				uploaderComment.getGoalComment();
 	}
 

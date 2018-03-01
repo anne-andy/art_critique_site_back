@@ -43,7 +43,7 @@ public class ImageController {
 	@RequestMapping(path="/{keyName}/clientComment", method = RequestMethod.POST, consumes = {"application/json"})
 	public @ResponseBody ClientComment addClientComment(@PathVariable("keyname") String keyName, @RequestBody ClientComment clientComment) {
 		
-		Image image = imageRepository.findByKeyName(keyName);
+		Image image = imageRepository.findByImageKey(keyName);
 		clientComment.setImage(image);
 		return clientCommentRepository.save(clientComment);
 	}

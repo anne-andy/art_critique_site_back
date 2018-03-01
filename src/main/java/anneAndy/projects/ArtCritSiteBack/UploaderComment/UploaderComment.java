@@ -1,13 +1,18 @@
 package anneAndy.projects.ArtCritSiteBack.UploaderComment;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,9 +24,14 @@ import anneAndy.projects.ArtCritSiteBack.User.User;
 @Table(name = "UploaderComment")
 public class UploaderComment {
 
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	private Integer idUploaderComment;
+	
+	//private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer idUploaderComment;
+	private String imageKey;
 	
 	private String goalComment;
 	
@@ -32,35 +42,37 @@ public class UploaderComment {
 	//private String imageKey;
 	
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="imageKey", nullable = false)
+	//@Id
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	//@JoinColumn(name="imageKey", nullable = false)
 	private Image image;
 	
 	public UploaderComment() {
 		this.setGoalComment("nothing");
 	}
 	
-	public UploaderComment(Integer idUploaderComment, String goalComment, String needComment, String otherComment) {
-		this.setId(idUploaderComment);
-		this.setGoalComment(goalComment);
-		this.setNeedComment(needComment);
-		this.setOtherComment(otherComment);
-	}
+//	public UploaderComment(String goalComment, String needComment, String otherComment) {
+//		this.setImageKey(imageKey);
+//		this.setGoalComment(goalComment);
+//		this.setNeedComment(needComment);
+//		this.setOtherComment(otherComment);
+//	}
 	
-	public UploaderComment(Integer idUploaderComment, String goalComment, String needComment, String otherComment, Image image) {
-		this.setId(idUploaderComment);
+	public UploaderComment(String goalComment, String needComment, String otherComment, Image image) {
+		this.imageKey = image.getImageKey();
 		this.setGoalComment(goalComment);
 		this.setNeedComment(needComment);
 		this.setOtherComment(otherComment);
 		this.setImage(image);
 	}
 	
-	public void setId(Integer idUploaderComment) {
-		this.idUploaderComment = idUploaderComment;
+	public void setImageKey(String imageKey) {
+		this.imageKey = imageKey;
 	}
 		
-	public Integer getId() {
-		return this.idUploaderComment;
+	public String getImageKey() {
+		return this.imageKey;
 	}
 
 	public String getGoalComment() {

@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import anneAndy.projects.ArtCritSiteBack.User.User;
 
 public interface ImageRepository extends CrudRepository<Image, String> {
-	Image findByKeyName(String keyName);
+	Image findByImageKey(String imageKey);
 	Image save(Image image);
 }
