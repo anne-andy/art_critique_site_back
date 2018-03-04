@@ -1,5 +1,7 @@
 package anneAndy.projects.ArtCritSiteBack.Image;
 
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,6 @@ import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientComment;
 import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientCommentRepository;
 import anneAndy.projects.ArtCritSiteBack.Services.S3.S3Service;
 import anneAndy.projects.ArtCritSiteBack.Services.S3.S3ServiceImpl;
-import anneAndy.projects.ArtCritSiteBack.User.IOException;
 import anneAndy.projects.ArtCritSiteBack.User.User;
 
 @CrossOrigin(origins = "http://localhost:8000", maxAge = 3600)
@@ -68,5 +69,10 @@ public class ImageController {
 
         System.out.println(String.format("received %s for %s", file.getOriginalFilename(), imageKey));
     }
+	
+//	@RequestMapping(value= "/images/{amount}", method = RequestMethod.GET)
+//    public @ResponseBody List<Image> getLatestImages(@RequestParam Integer amount) {
+//       
+//    }
 
 }

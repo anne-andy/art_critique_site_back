@@ -1,9 +1,12 @@
 package anneAndy.projects.ArtCritSiteBack.Image;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +17,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,6 +40,10 @@ public class Image  {
 	private String type; //TO DO: this needs to be an enum in the future
 	
 	private String title;
+	
+	@Column(name = "dateSubmitted", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateSubmitted;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -114,6 +127,15 @@ public class Image  {
 	@Override
 	public String toString() {
 		return imageKey + " : " + title + " : " + type;
+	}
+
+	public String getDateSubmitted() {
+		SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return newFormat.format(dateSubmitted);
+	}
+
+	public void setDateSubmitted(Date dateSubmitted) {
+		this.dateSubmitted = dateSubmitted;
 	}
 
 }
