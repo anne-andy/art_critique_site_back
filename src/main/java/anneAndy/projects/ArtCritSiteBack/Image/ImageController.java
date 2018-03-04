@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientComment;
 import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientCommentRepository;
 import anneAndy.projects.ArtCritSiteBack.Services.S3.S3Service;
+import anneAndy.projects.ArtCritSiteBack.Services.S3.S3ServiceImpl;
 import anneAndy.projects.ArtCritSiteBack.User.IOException;
 import anneAndy.projects.ArtCritSiteBack.User.User;
 
@@ -38,10 +39,10 @@ public class ImageController {
 		return new Image("asd","asd");
 	}
 	
-	@RequestMapping(path="/{keyName}/upload", method = RequestMethod.POST, consumes = {"application/json"})
-	public ResponseEntity<?> uploadImageFile(@RequestParam String keyName, MultipartFile file) {
-        return s3Service.uploadFile(keyName, file);
-	}
+//	@RequestMapping(path="/{keyName}/upload", method = RequestMethod.POST, consumes = {"application/json"})
+//	public ResponseEntity<?> uploadImageFile(@RequestParam String keyName, MultipartFile file) {
+//        return s3Service.uploadFile(keyName, file);
+//	}
 	
 	@RequestMapping(path="/{keyName}/clientComment", method = RequestMethod.POST, consumes = {"application/json"})
 	public @ResponseBody ClientComment addClientComment(@PathVariable("keyname") String keyName, @RequestBody ClientComment clientComment) {
@@ -55,12 +56,14 @@ public class ImageController {
     public void upload(@RequestParam("file") MultipartFile file, @RequestParam("imageKey") String imageKey ) throws java.io.IOException {
 
         byte[] bytes;
+        s3Service = new S3ServiceImpl();
 
         if (!file.isEmpty()) {
              bytes = file.getBytes();
              System.out.println(file);
              System.out.println(imageKey);
-             s3Service.uploadFile();
+             s3Service.uploadFile(imageKey, file);
+             //s3Service.test();
         }
 
         System.out.println(String.format("received %s for %s", file.getOriginalFilename(), imageKey));

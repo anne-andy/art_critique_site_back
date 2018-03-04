@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface S3Service {
 
-	public ResponseEntity<?>  uploadFile();
+	public ResponseEntity<?>  uploadFile(String imageKey, MultipartFile file);
+	public void test();
 	
 }

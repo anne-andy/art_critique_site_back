@@ -20,28 +20,28 @@ public class S3ServiceImpl implements S3Service {
 	
 	private AmazonS3 s3Client;
 
-	public ResponseEntity<?> uploadFile() {
+	public ResponseEntity<?> uploadFile(String imageKey, MultipartFile file) {
 		
 		System.out.println("were here");
 		s3Client = S3Config.generateS3Client();
-//		
-//		try {
-//			if (file.isEmpty()) {
-//	            return new ResponseEntity("please select a file!", HttpStatus.OK);
-//	        } else {
-//	        	s3Client.putObject("anneandycdn", imageKey, convertMultiPartToFile(file));
-//	        }
-//			//.withCannedAcl(CannedAccessControlList.PublicRead)); this doesn't work for some reason
-//		} catch (AmazonServiceException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SdkClientException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		
+		try {
+			if (file.isEmpty()) {
+	            return new ResponseEntity("please select a file!", HttpStatus.OK);
+	        } else {
+	        	s3Client.putObject("anneandycdn", imageKey, convertMultiPartToFile(file));
+	        }
+			//.withCannedAcl(CannedAccessControlList.PublicRead)); this doesn't work for some reason
+		} catch (AmazonServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SdkClientException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return new ResponseEntity("Successfully uploaded file: ", new HttpHeaders(), HttpStatus.OK);
 	
@@ -53,6 +53,10 @@ public class S3ServiceImpl implements S3Service {
 	    fos.write(file.getBytes());
 	    fos.close();
 	    return convFile;
+	}
+	
+	public void test() {
+		System.out.println("test works");
 	}
 	
 }
