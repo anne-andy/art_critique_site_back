@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import anneAndy.projects.ArtCritSiteBack.Image.Image;
 import anneAndy.projects.ArtCritSiteBack.Image.ImageRepository;
@@ -41,6 +42,7 @@ public class UserController {
 		System.out.println(image);
 		User user = userRepository.findByIdUser(id);
 		image.setUser(user);
+		image.getUploaderComment().setImageKey(image.getImageKey());
 		System.out.println(image.getUploaderComment().getImage());
 		//TODO: generate unique keyname here?
 		return imageRepository.save(image);

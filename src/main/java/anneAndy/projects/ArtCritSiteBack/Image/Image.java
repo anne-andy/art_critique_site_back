@@ -23,9 +23,7 @@ import anneAndy.projects.ArtCritSiteBack.User.User;
 
 @Entity
 @Table(name = "Image")
-public class Image implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Image  {
 	
 	@Id
 	private String imageKey;
@@ -88,7 +86,6 @@ public class Image implements Serializable {
 		this.title = title;
 	}
 	
-	
 	public User getUser() {
 		return user;
 	}
@@ -116,12 +113,7 @@ public class Image implements Serializable {
 	
 	@Override
 	public String toString() {
-		return imageKey + " : " + 
-	title + " : " + 
-				type + " : " + 
-//	user.getId() + " : " + 
-//				user.getUserName() + " : " +
-				uploaderComment.getGoalComment();
+		return imageKey + " : " + title + " : " + type;
 	}
 
 }

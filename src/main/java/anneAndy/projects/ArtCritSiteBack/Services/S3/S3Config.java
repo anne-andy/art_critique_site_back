@@ -8,11 +8,20 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 @Configuration
 public class S3Config {
+	
+	private static String s3Url;
 
 	public static AmazonS3 generateS3Client() {
-		 return AmazonS3ClientBuilder.standard()
+	
+		s3Url = "https://s3.amazonaws.com/anneandycdn/";
+		
+		return AmazonS3ClientBuilder.standard()
             .withRegion(Regions.US_EAST_1)
             .build();
+	}
+	
+	public static String getS3Url() {
+		return s3Url;
 	}
 
 }
