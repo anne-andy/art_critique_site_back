@@ -2,6 +2,7 @@ package anneAndy.projects.ArtCritSiteBack.Image;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,11 @@ import anneAndy.projects.ArtCritSiteBack.User.User;
 @RequestMapping(path="/images")
 public class ImageController {
 	
-	ImageRepository imageRepository;
-	ClientCommentRepository clientCommentRepository;
+	@Autowired
+	private ImageRepository imageRepository;
+	
+	@Autowired
+	private ClientCommentRepository clientCommentRepository;
 	
 	S3Service s3Service;
 	
@@ -70,9 +74,9 @@ public class ImageController {
         System.out.println(String.format("received %s for %s", file.getOriginalFilename(), imageKey));
     }
 	
-//	@RequestMapping(value= "/images/{amount}", method = RequestMethod.GET)
-//    public @ResponseBody List<Image> getLatestImages(@RequestParam Integer amount) {
-//       
-//    }
+	@RequestMapping(value= "/recent", method = RequestMethod.GET)
+    public @ResponseBody Iterable<Image> getLatestImages() {
+		return imageRepository.findTop2ByOrderByDateSubmittedDesc(); 
+    }
 
 }
