@@ -25,6 +25,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientComment;
@@ -43,6 +44,7 @@ public class Image  {
 	
 	private String title;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "dateSubmitted", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateSubmitted;
@@ -58,7 +60,7 @@ public class Image  {
 	private UploaderComment uploaderComment;
 	
 	@OneToMany(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
+            cascade =  {CascadeType.PERSIST},
             mappedBy = "image")
 	private Set<ClientComment> clientComments;
 	
@@ -128,7 +130,8 @@ public class Image  {
 	
 	@Override
 	public String toString() {
-		return imageKey + " : " + title + " : " + type;
+		return imageKey + " : " + title + " : " + type +
+				" : " + user.getId();
 	}
 
 	public String getDateSubmitted() {

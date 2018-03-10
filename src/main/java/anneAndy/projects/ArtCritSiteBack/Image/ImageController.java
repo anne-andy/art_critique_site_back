@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientComment;
 import anneAndy.projects.ArtCritSiteBack.ClientComment.ClientCommentRepository;
 import anneAndy.projects.ArtCritSiteBack.Services.S3.S3Service;
 import anneAndy.projects.ArtCritSiteBack.Services.S3.S3ServiceImpl;
 import anneAndy.projects.ArtCritSiteBack.User.User;
+import anneAndy.projects.ArtCritSiteBack.User.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:8000", maxAge = 3600)
 @Controller
@@ -32,9 +35,31 @@ public class ImageController {
 	private ImageRepository imageRepository;
 	
 	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
 	private ClientCommentRepository clientCommentRepository;
 	
 	S3Service s3Service;
+	
+	@RequestMapping(value= "/{imageKey:.+}", method = RequestMethod.PUT, consumes = {"application/json"})
+	public @ResponseBody Iterable<Image> updateUserImage(@PathVariable("imageKey") String imageKey, @RequestBody Image editedImage) {
+		
+		//User user = userRepository.findByIdUser()
+		Image originalImage = imageRepository.findByImageKey(imageKey);
+	
+		editedImage.setUser(originalImage.getUser());
+		editedImage.setClientComments(originalImage.getClientComments());
+		editedImage.setTitle("Its working");
+		//editedImage.getUploaderComment().setImage(editedImage);
+
+//		System.out.println("Printing edited image...");
+//		System.out.println(editedImage);
+		imageRepository.save(editedImage);
+		
+		return imageRepository.findTop50ByOrderByDateSubmittedDesc();
+		
+	}
 	
 	@RequestMapping(path="/new", method = RequestMethod.POST, consumes = {"application/json"})
 	public @ResponseBody Image saveImageMetadata(@RequestBody Image image) {
@@ -76,7 +101,7 @@ public class ImageController {
 	
 	@RequestMapping(value= "/recent", method = RequestMethod.GET)
     public @ResponseBody Iterable<Image> getLatestImages() {
-		return imageRepository.findTop2ByOrderByDateSubmittedDesc(); 
+		return imageRepository.findTop50ByOrderByDateSubmittedDesc(); 
     }
-
+	
 }

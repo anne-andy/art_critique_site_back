@@ -11,5 +11,5 @@ public interface ImageRepository extends CrudRepository<Image, String> {
 	Image findByImageKey(String imageKey);
 	Image save(Image image);
 	Iterable<Image> findAll();
-	Iterable<Image> findTop2ByOrderByDateSubmittedDesc();
+	Iterable<Image> findTop50ByOrderByDateSubmittedDesc();
 }

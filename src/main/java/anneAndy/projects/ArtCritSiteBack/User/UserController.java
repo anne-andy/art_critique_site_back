@@ -1,5 +1,7 @@
 package anneAndy.projects.ArtCritSiteBack.User;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,12 +41,15 @@ public class UserController {
 	
 	@RequestMapping(value= "/{id}/image", method = RequestMethod.POST)
 	public @ResponseBody Image uploadUserImage(@PathVariable("id") int id, @RequestBody Image image) {
-		System.out.println(image);
+
 		User user = userRepository.findByIdUser(id);
+		
 		image.setUser(user);
 		image.getUploaderComment().setImageKey(image.getImageKey());
-		System.out.println(image.getUploaderComment().getImage());
+		image.setDateSubmitted(new Date());
+		
 		//TODO: generate unique keyname here?
+		
 		return imageRepository.save(image);
 		
 	}
