@@ -1,5 +1,6 @@
 package anneAndy.projects.ArtCritSiteBack.ClientComment;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class ClientComment {
 	private Integer idUser; //this will be hateous link
 	
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
 	@JoinColumn(name="imageKey", nullable = false)
 	private Image image;
 	
@@ -39,25 +40,25 @@ public class ClientComment {
 	}
 	
 	public ClientComment(Integer idClientComment, String commentText, Integer commentScore, Integer idUser) {
-		this.setId(idClientComment);
+		this.setIdClientComment(idClientComment);
 		this.setCommentText(commentText);
 		this.setCommentScore(commentScore);
 		this.setIdUser(idUser);
 	}
 	
 	public ClientComment(Integer idClientComment, String commentText, Integer commentScore, Integer idUser, Image image) {
-		this.setId(idClientComment);
+		this.setIdClientComment(idClientComment);
 		this.setCommentText(commentText);
 		this.setCommentScore(commentScore);
 		this.setIdUser(idUser);
 		this.setImage(image);
 	}
 	
-	public void setId(Integer idClientComment) {
+	public void setIdClientComment(Integer idClientComment) {
 		this.idClientComment = idClientComment;
 	}
 		
-	public Integer getId() {
+	public Integer getIdClientComment() {
 		return this.idClientComment;
 	}
 
@@ -92,5 +93,12 @@ public class ClientComment {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+	
+	@Override
+	public String toString() {
+		return idClientComment + " : " + commentScore + " : " + commentText + " : " + idUser +
+				image.getImageKey(); 
+	}
+
 	
 }

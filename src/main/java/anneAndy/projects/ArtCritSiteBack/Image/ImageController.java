@@ -1,6 +1,8 @@
 package anneAndy.projects.ArtCritSiteBack.Image;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -43,21 +45,21 @@ public class ImageController {
 	S3Service s3Service;
 	
 	@RequestMapping(value= "/{imageKey:.+}", method = RequestMethod.PUT, consumes = {"application/json"})
-	public @ResponseBody Iterable<Image> updateUserImage(@PathVariable("imageKey") String imageKey, @RequestBody Image editedImage) {
+	public @ResponseBody Image updateUserImage(@PathVariable("imageKey") String imageKey, @RequestBody Image editedImage) {
 		
-		//User user = userRepository.findByIdUser()
 		Image originalImage = imageRepository.findByImageKey(imageKey);
 	
 		editedImage.setUser(originalImage.getUser());
-		editedImage.setClientComments(originalImage.getClientComments());
-		editedImage.setTitle("Its working");
-		//editedImage.getUploaderComment().setImage(editedImage);
+		Set<ClientComment> comments = editedImage.getClientComments();
+		
+		for(ClientComment comment : comments) {
+			comment.setImage(editedImage);
+		    clientCommentRepository.save(comment);
+		}
 
-//		System.out.println("Printing edited image...");
-//		System.out.println(editedImage);
 		imageRepository.save(editedImage);
 		
-		return imageRepository.findTop50ByOrderByDateSubmittedDesc();
+		return imageRepository.findByImageKey(imageKey);
 		
 	}
 	

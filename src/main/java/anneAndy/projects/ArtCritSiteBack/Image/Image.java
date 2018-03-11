@@ -131,7 +131,8 @@ public class Image  {
 	@Override
 	public String toString() {
 		return imageKey + " : " + title + " : " + type +
-				" : " + user.getId();
+			   " : " + user.getId() + " : " + 
+			   clientComments;
 	}
 
 	public String getDateSubmitted() {
