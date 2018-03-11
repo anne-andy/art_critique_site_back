@@ -66,15 +66,8 @@ public class ImageController {
 	@RequestMapping(path="/new", method = RequestMethod.POST, consumes = {"application/json"})
 	public @ResponseBody Image saveImageMetadata(@RequestBody Image image) {
 		System.out.println(image);
-		//User user = userRepository.findById(image.idUser);
-		//return imageRepository.save(image);
 		return new Image("asd","asd");
 	}
-	
-//	@RequestMapping(path="/{keyName}/upload", method = RequestMethod.POST, consumes = {"application/json"})
-//	public ResponseEntity<?> uploadImageFile(@RequestParam String keyName, MultipartFile file) {
-//        return s3Service.uploadFile(keyName, file);
-//	}
 	
 	@RequestMapping(path="/{keyName}/clientComment", method = RequestMethod.POST, consumes = {"application/json"})
 	public @ResponseBody ClientComment addClientComment(@PathVariable("keyname") String keyName, @RequestBody ClientComment clientComment) {
@@ -95,7 +88,6 @@ public class ImageController {
              System.out.println(file);
              System.out.println(imageKey);
              s3Service.uploadFile(imageKey, file);
-             //s3Service.test();
         }
 
         System.out.println(String.format("received %s for %s", file.getOriginalFilename(), imageKey));

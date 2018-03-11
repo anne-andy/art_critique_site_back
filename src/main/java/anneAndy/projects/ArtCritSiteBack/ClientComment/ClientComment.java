@@ -28,7 +28,7 @@ public class ClientComment {
 	
 	private Integer commentScore;
 	
-	private Integer idUser; //this will be hateous link
+	private Integer idUser; //this will be hateous link?
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)

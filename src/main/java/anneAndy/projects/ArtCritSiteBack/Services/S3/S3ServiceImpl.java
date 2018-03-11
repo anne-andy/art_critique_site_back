@@ -31,7 +31,6 @@ public class S3ServiceImpl implements S3Service {
 	        } else {
 	        	s3Client.putObject("anneandycdn", imageKey, convertMultiPartToFile(file));
 	        }
-			//.withCannedAcl(CannedAccessControlList.PublicRead)); this doesn't work for some reason
 		} catch (AmazonServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,10 +52,6 @@ public class S3ServiceImpl implements S3Service {
 	    fos.write(file.getBytes());
 	    fos.close();
 	    return convFile;
-	}
-	
-	public void test() {
-		System.out.println("test works");
 	}
 	
 }

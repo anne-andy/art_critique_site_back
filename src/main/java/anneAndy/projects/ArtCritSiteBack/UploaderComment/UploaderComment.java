@@ -24,12 +24,6 @@ import anneAndy.projects.ArtCritSiteBack.User.User;
 @Table(name = "UploaderComment")
 public class UploaderComment {
 
-	// @Id
-	// @GeneratedValue(strategy=GenerationType.IDENTITY)
-	// private Integer idUploaderComment;
-
-	// private static final long serialVersionUID = 1L;
-
 	@Id
 	private String imageKey;
 
@@ -39,26 +33,14 @@ public class UploaderComment {
 
 	private String otherComment;
 
-	// private String imageKey;
-
 	@JsonIgnore
-	// @Id
     @OneToOne
     @PrimaryKeyJoinColumn(name="imageKey", referencedColumnName="imageKey")
-	// @JoinColumn(name="imageKey", nullable = false)
 	private Image image;
 
 	public UploaderComment() {
 		this.setGoalComment("nothing");
 	}
-
-	// public UploaderComment(String goalComment, String needComment, String
-	// otherComment) {
-	// this.setImageKey(imageKey);
-	// this.setGoalComment(goalComment);
-	// this.setNeedComment(needComment);
-	// this.setOtherComment(otherComment);
-	// }
 
 	public UploaderComment(String goalComment, String needComment, String otherComment, Image image) {
 		this.imageKey = image.getImageKey();
@@ -107,13 +89,5 @@ public class UploaderComment {
 	public void setImage(Image image) {
 		this.image = image;
 	}
-
-	// public String getImageKey() {
-	// return imageKey;
-	// }
-	//
-	// public void setImageKey(String imageKey) {
-	// this.imageKey = imageKey;
-	// }
 
 }
